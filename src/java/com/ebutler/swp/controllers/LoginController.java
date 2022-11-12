@@ -5,10 +5,12 @@
 package com.ebutler.swp.controllers;
 
 import com.ebutler.swp.dao.AddressDAO;
+import com.ebutler.swp.dao.AdminDAO;
 import com.ebutler.swp.dao.CustomerDAO;
 import com.ebutler.swp.dao.ProviderDAO;
 import com.ebutler.swp.dao.UserDAO;
 import com.ebutler.swp.dto.AddressDTO;
+import com.ebutler.swp.dto.AdminDTO;
 import com.ebutler.swp.dto.CustomerDTO;
 import com.ebutler.swp.dto.ProductDetailDTO;
 import com.ebutler.swp.dto.ProviderDTO;
@@ -41,6 +43,9 @@ public class LoginController extends HttpServlet {
     private final String NOT_PASS = "guest_loginPage.jsp";
     private final String PRO_PAGE_PRODUCT = "Provider_ProductController";
     private final String PRO_PAGE_SERVICE = "Provider_ServiceController";
+    private final String ADMIN_PAGE = "AdminController";
+    private final String ADMINCUS_PAGE = "AdminCustomerController";
+    private final String ADMINRE_PAGE = "AdminReController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -77,7 +82,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("CURRENT_CUSTOMER", customer);
                 url = CUS_PAGE;
             } else if (login_user.getRole_id().equals(SHIP_ROLE)) {
-                ShipperDTO shipper = userDAO.getShipper(username, password) ;
+                ShipperDTO shipper = userDAO.getShipper(username, password);
                 session.setAttribute("CURRENT_SHIPPER", shipper);
                 url = SHIP_PAGE;
             } else if (userDAO.Login(username, password).getRole_id().equals(PRO_ROLE)) {
@@ -89,11 +94,27 @@ public class LoginController extends HttpServlet {
                 List<ProviderServiceDTO1> listService = providerDAO.loadListService(provider);
                 if (listProduct.isEmpty() && listService != null) {
                     url = PRO_PAGE_SERVICE;
-                } else if (listService.isEmpty() && listProduct != null) { 
+                } else if (listService.isEmpty() && listProduct != null) {
                     url = PRO_PAGE_PRODUCT;
                 }
             } else {
                 request.setAttribute("LOGIN_ERROR", "Incorect username or password");
+            }
+            AdminDAO admindao = new AdminDAO();
+            AdminDTO admin = admindao.getAdmin(username, password);
+
+            if (admin != null) {
+                session.setAttribute("ADMIN_LOGIN", admin);
+
+                if (admin.getRole_ID().equals("MA")) {
+                    url = ADMIN_PAGE;
+                } else if (admin.getRole_ID().equals("US")) {
+                    url = ADMINCUS_PAGE;
+                } else if (admin.getRole_ID().equals("RE")) {
+                    url = ADMINRE_PAGE;
+                } else {
+                    request.setAttribute("LOGIN_ERROR", "Incorect username or password");
+                }
             }
 
         } catch (Exception e) {

@@ -260,6 +260,30 @@
         <servlet-name>CreateShippingAddressController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.CreateShippingAddressController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddAdminController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.AddAdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminChangePassword</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.AdminChangePassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.AdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminCustomerController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.AdminCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminEditController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.AdminEditController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminReController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.AdminReController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -519,6 +543,30 @@
     <servlet-mapping>
         <servlet-name>CreateShippingAddressController</servlet-name>
         <url-pattern>/CreateShippingAddressController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAdminController</servlet-name>
+        <url-pattern>/AddAdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminChangePassword</servlet-name>
+        <url-pattern>/AdminChangePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        <url-pattern>/AdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminCustomerController</servlet-name>
+        <url-pattern>/AdminCustomerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminEditController</servlet-name>
+        <url-pattern>/AdminEditController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminReController</servlet-name>
+        <url-pattern>/AdminReController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>60</session-timeout>

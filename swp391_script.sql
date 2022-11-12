@@ -219,13 +219,6 @@ CREATE TABLE tblRevenueByMonth
 GO
 
 -----ADMIN-----
-CREATE TABLE tblAdminMaster
-(
-	[user_Name] nvarchar(30) PRIMARY KEY NOT NULL ,
-	[password] nvarchar(30) NOT NULL
-)
-GO
-
 CREATE TABLE tblAdminRole
 (
 	role_ID nvarchar(6) PRIMARY KEY NOT NULL ,
@@ -237,7 +230,8 @@ CREATE TABLE tblAdmin
 (
 	[user_Name] nvarchar(30) PRIMARY KEY NOT NULL ,
 	password nvarchar(30) NOT NULL ,
-	role_ID nvarchar(6) REFERENCES tblAdminRole(role_ID) NOT NULL
+	role_ID nvarchar(6) REFERENCES tblAdminRole(role_ID) NOT NULL,
+	status int
 )
 GO
 
@@ -3366,52 +3360,10 @@ INSERT INTO tblShipper
 	(username, password, name, status, wallet)
 VALUES
 	('shoppe5', '1', 'Le Ba Hau', 1, 0)
+	
+------------- bảng admin --------------------
+insert into tblAdminRole(role_ID, role_Name) values ('MA', 'Admin Master')
+insert into tblAdminRole(role_ID, role_Name) values ('US', 'Admin User')
+insert into tblAdminRole(role_ID, role_Name) values ('RE', 'Admin Revenue')
 
----- bảng shipper company -----
---UPDATE tblDelivery SET username_Shipper = 'shoppe1' WHERE order_id = '1'
-
---SELECT * FROM tblShipper
---- bảng shipper ---
-/*SELECT * FROM tblProductDetail
-SELECT * FROM tblOrder_Product_Detail
-SELECT * FROM tblOrder
-SELECT * FROM tblDelivery
-SELECT * FROM tblReviewProduct
-SELECT * FROM tblOrder_Product_Detail WHERE order_ID = 2 AND status = 3
-SELECT * FROM tblOrder_Product_Detail WHERE order_ID = 2
-select * from tblDelivery
-
-SELECT * FROM tblShipper
-DELETE tblOrder
-SELECT * FROM tblShipper
-SELECT * FROM tblShipperCategory
-SELECT * FROM tblShipperIncome
-DELETE tblOrder_Product_Detail 
-DELETE tblDelivery
-SELECT * FROM tblDelivery
-SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID WHERE Ord.shipping = ? 
-
-
-SELECT * from tblUser WHERE username LIKE 'shoppe1' AND password LIKE '1' AND status = 1
-SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID WHERE Ord.shipping = ?
-
-SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID WHERE Ord.shipping = 'shopee1'
-SELECT nameCategory FROM tblShipper WHERE username = 'shopee1'
-
-SELECT OPD.id, De.order_id, PD.name, OPD.quantity, PD.price, OPD.status FROM ( tblDelivery De JOIN tblOrder_Product_Detail OPD ON De.order_id = OPD.order_ID ) JOIN tblProductDetail PD ON PD.id = OPD.product_detail_ID  WHERE De.order_id = '1' AND De.shipper_id =  'shopee'
-
-
-SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total , Ord.shipping, PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ?
-
-SELECT detail.id, detail.provider_ID, detail.product_ID, detail.name, detail.quantity, detail.price, detail.image, detail.description, detail.status FROM tblProduct product JOIN tblProductDetail detail on product.product_ID = detail.product_ID JOIN tblProductCategory cate ON cate.category_ID = product.category_ID 
-WHERE cate.category_ID = 'KC' AND product.product_ID = 3 ORDER BY id asc OFFSET 12 ROWS FETCH FIRST 12 ROWS ONLY*/
-
---UPDATE tblDelivery SET username_Shipper = ? WHERE order_id = ?
---SELECT username_Shipper FROM tblDelivery WHERE order_id = '1'
-/*SELECT * FROM tblUser
-SELECT * FROM tblDelivery
-SELECT * FROM tblOrder
-SELECT * FROM tblOrder_Product_Detail
-SELECT DISTINCT Ord.order_ID, Ord.order_Date, Ord.customer_ID, Ord.status, Ord.total ,  PD.provider_ID FROM ( tblOrder Ord JOIN tblOrder_Product_Detail OrdP ON Ord.order_ID = OrdP.order_ID ) JOIN tblProductDetail PD ON PD.id = OrdP.product_detail_ID WHERE PD.provider_ID = ?
-SELECT De.order_id, De.address,De.username_Shipper ,Ord.order_Date,Ord.customer_ID, Cus.name,Ord.total, De.status FROM (tblDelivery De JOIN tblOrder Ord ON De.order_id = Ord.order_ID) JOIN tblCustomer Cus ON Cus.username = Ord.customer_ID */
-
+insert into tblAdmin(user_Name, password, role_ID) values('bao', '1', 'MA', 1)

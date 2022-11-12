@@ -57,20 +57,75 @@
         <script src="./assets/js/config.js"></script>
     </head>
 
-    <body>
+    <body style="background-color: #273A89">
         <%
             AdminDTO admin = (AdminDTO) session.getAttribute("Admin_Login");
 
         %>
         <!-- Layout wrapper -->
-
-        <div class="navbar-nav-right d-flex flex-row-reverse align-items-center my-4" id="navbar-collapse">
-            <nav class="navbar navbar-light">
-                <div class="container-fluid">
-                    <div style="cursor: pointer; color:white;" class="btn btn-outline-danger">
-
-                        <a href="MainController?action=Logout">Logout</a>
+        <div class="container-xxl " >
+            <div class="container-fluid nav-bar bg-white px-0 border-bottom-1">
+                <nav class="navbar navbar-expand-lg  navbar-light py-0 px-5 border-bottom d-flex justify-content-between">
+                    <div>
+                        <a class="navbar-brand d-flex align-items-center text-center">
+                            <div class="icon p-2 me-2">
+                                <img class="img-fluid"
+                                     src="./img/about_us.png"
+                                     alt="Icon" style="width: 30px; height: 30px;">
+                            </div>
+                            <h1 class="m-0 " style="color:#273A89;">E-Butler</h1>
+                        </a>
+                        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
                     </div>
+
+
+
+
+                    <!-- On hover dropdown button -->
+
+                    <!-- <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a> -->
+                    <div class="btn-group me-3 " ">
+
+                        <div style="cursor: pointer; " class="btn btn-secondary">
+
+                            <a style="color:white" href="MainController?action=Logout">Logout</a>
+                        </div>
+                    </div>
+                </nav>
+                <div class="navbar-nav-right d-flex flex-row-reverse align-items-center my-4" id="navbar-collapse">
+
+
+                    </ul>
+
+                </div>
+
+                <div class="nav mx-5 d-flex justify-content-between " style="width: 165%">
+                    <div>
+                        <h2>Admin List</h2>
+                    </div>
+                    <div> <button data-bs-toggle="modal" data-bs-target="#basicModal" class="btn btn-primary mx-3 mb-5 js-create-admin">+ Create New Admin</button>  </div>
+
+                    <div style="color:red;font-style:italic;">
+                        ${Message}
+                    </div>
+                </div>
+
+                <div class="mx-5 my-3">
+                    <nav aria-label="breadcrumb m-5">
+                        <ol class="breadcrumb breadcrumb-style">
+
+                            <li class="breadcrumb-item">
+                                <a href="AdminController">Admin</a>
+                            </li>
+                            <li class="breadcrumb-item active">List</li>
+                        </ol>
+                    </nav>
+                </div>
+                </nav>
+                <div class="container-fluid">
+
 
 
 
@@ -83,279 +138,254 @@
                     </form>
 
                 </div>
-            </nav>     
-        </ul>
+                </nav>     
 
-    </div>
+                <!-- / Navbar -->
 
-    <nav class="nav mx-5">
-        <h2>Admin List</h2>
+                <!-- Content wrapper -->
+                <div class="content-wrapper">
+                    <!-- Content -->
+                    <%        AdminDAO admindao = new AdminDAO();
 
-        <button data-bs-toggle="modal" data-bs-target="#basicModal" class="btn btn-primary mx-3 mb-5 js-create-admin">+ Create New Admin</button>  
-        <div style="color:red;font-style:italic;">
-            ${Message}
-        </div>
-    </nav>
+                        List<String> listRole1 = admindao.getRoleName();
 
-    <div class="mx-5 mt-3">
-        <nav aria-label="breadcrumb m-5">
-            <ol class="breadcrumb breadcrumb-style">
+                        int c = 0;
+                    %>
+                    <div class="modal fade" id="basicModal">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <form action="AddAdminController" method="post">
 
-                <li class="breadcrumb-item">
-                    <a href="AdminController">Admin</a>
-                </li>
-                <li class="breadcrumb-item active">List</li>
-            </ol>
-        </nav>
-    </div>
-</nav>
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel1">Create New Admin</h5>
+                                        <button type="button" class="btn-close js-modal-close-4"data-bs-dismiss="modal" ></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
 
+                                            <div class="col mb-3">
+                                                <label  for="username" class="form-label">Username</label>
+                                                <input name="username" type="text" id="username" class="form-control" ">
+                                            </div>
+                                            <div class="col mb-3">
+                                                <label for="password" class="form-label">Password</label>
+                                                <input name="password" type="password" id="password"  class="form-control" placeholder="" >
+                                            </div>
+                                        </div>
+                                        <div class="row ">
+                                            <div class="col">
+                                                <label class="form-label">Role</label>
+                                                <select name="role_ID" class="form-select " aria-label="Default select example">
+                                                    <option value="" selected="">Choose Role</option>
+                                                    <%                                                                                for (String role : listRole1) {
+                                                    %>
+                                                    <option ><%= listRole1.get(c++)%></option>        
+                                                    <%
+                                                        }
+                                                    %>
+                                                </select>
+                                            </div>
 
-<!-- / Navbar -->
-
-<!-- Content wrapper -->
-<div class="content-wrapper">
-    <!-- Content -->
-    <%        AdminDAO admindao = new AdminDAO();
-
-        List<String> listRole1 = admindao.getRoleName();
-
-        int c = 0;
-    %>
-    <div class="modal fade" id="basicModal">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <form action="AddAdminController" method="post">
-
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel1">Create New Admin</h5>
-                        <button type="button" class="btn-close js-modal-close-4" ></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-
-                            <div class="col mb-3">
-                                <label  for="username" class="form-label">Username</label>
-                                <input name="username" type="text" id="username" class="form-control" ">
-                            </div>
-                            <div class="col mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input name="password" type="password" id="password"  class="form-control" placeholder="" >
-                            </div>
-                        </div>
-                        <div class="row ">
-                            <div class="col">
-                                <label class="form-label">Role</label>
-                                <select name="role_ID" class="form-select " aria-label="Default select example">
-                                    <option value="" selected="">Choose Role</option>
-                                    <%                                                                                for (String role : listRole1) {
-                                    %>
-                                    <option ><%= listRole1.get(c++)%></option>        
-                                    <%
-                                        }
-                                    %>
-                                </select>
-                            </div>
-
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-label-secondary js-modal-close-5" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-label-secondary js-modal-close-5" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
+
+
+
+                    <!-- Modal Delete -->
+                    <div class="modal js-modal " tabindex="-1" >
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+                                    <button type="button" class="btn-close js-modal-close" data-bs-dismiss="modal" aria-label="Close">
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Are you sure to delete this user?</p>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger js-modal-close-2 " >Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Confirm</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-        </div>
-    </div>
-</form>
+
+
+                    <!-- Modal 1-->
+                    <div class="modal js-modal-confirm" id="modalToggle" aria-labelledby="modalToggleLabel" tabindex="-1" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog  modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalToggleLabel">Edit User</h5>
+                                    <button type="button" class="btn-close js-modal-close-1" ></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="row">
+                                            <div class="col mb-3">
+                                                <%
+                                                    List<AdminDTO> listAdmin1 = admindao.getAllAdmin();
+                                                    for (AdminDTO adminDTO : listAdmin1) {%>
+                                                <label for="username" class="form-label">Username</label>
+                                                <input type="text" value="<%= adminDTO.getUsername()%>" id="username" class="form-control" placeholder="Enter Username" readonly="">
+                                                <%}%>
+                                            </div>
+                                            <div class="col mb-3">
+                                                <label class="form-label">Role</label>
+                                                <select class="form-select " aria-label="Default select example">
+                                                    <option selected>Select Role</option>
+                                                    <option value="1">Role1</option>
+                                                    <option value="2">Role2</option>              
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" id="changepassbtn" data-bs-target="#modalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Change Password</button>
+                                    <button type="button" class="btn btn-danger js-modal-close-3" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal 2-->
+                    <div class="modal fade " id="modalToggle2" aria-hidden="true" aria-labelledby="modalToggleLabel2" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalToggleLabel2">Change Password</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="row">
+                                            <div class="col mb-3">
+                                                <label for="o-pass" class="form-label">Old Password</label>
+                                                <input type="password" id="o-pass" class="form-control">
+                                            </div>
+                                            <div class="col mb-3">
+                                                <label for="password" class="form-label">Password</label>
+                                                <input type="password" id="password" class="form-control" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="table-responsive px-5 py-5">
+
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+
+                                    <th>Username</th>
+                                    <th>Password</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+
+                                    <th>Actions</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+
+                                <%
+
+                                    List<String> listRole2 = admindao.getAllRoleName();
+                                    int c1 = 0;
+                                    List<AdminDTO> listAdmin = new ArrayList();
+                                    listAdmin = (List<AdminDTO>) session.getAttribute("Admin_List");
+
+                                    if (listAdmin.size() == 0) { %>
+                            <h1 class="btn btn-danger">No results</h1> <%
+                                }
+                                for (AdminDTO admindto : listAdmin) {
+
+
+                            %>
+
+                            <tr>
+                                <td><%= admindto.getUsername()%></td>
+                                <td><%= admindto.getPassword()%></td>
+
+                                <td>
+                                    <%= listRole2.get(c1++)%>
+                                </td>
+                                <td><%if (admindto.getStatus() == 1) { %>
+                                    <span class="badge bg-label-success">Active</span> <%
+
+                        } else {%>
+                                    <span class="badge bg-label-danger">Inactive</span> <% }%>
+                                </td>
+                                <td style="padding-left:0 ;">
+                                    <div class="d-flex"
+                                         >
+                                        <form action="AdminController" method="post">
+                                            <input type="hidden" name="action" value="showupdate">                       
+                                            <input type="hidden" name="username" value="<%= admindto.getUsername()%>">
+
+                                            <button class="btn btn-dark"  style="color:white" type="submit"><i class="bx bx-edit mx-1 "></i> Edit </button>
+                                        </form>
+                                        <form action="AdminController" method="post">
+                                            <input type="hidden" name="action" value="showchangepass">
+                                            <input type="hidden" name="username" value="<%= admindto.getUsername()%>">
+                                            <button type="submit" style="color:white" class="btn "><i class="bx bx-pen mx-1 "></i>Change Password</button>
+                                        </form>
+                                        <form  action="DeleteAdController" method="post">
+
+                                            <input type="hidden" name="puser" value="<%= admindto.getUsername()%>"> 
+                                            <input type="hidden" name="status" value="<%= admindto.getStatus()%>">
+                                            <button type="submit" style="color:white" class="btn js-delete"><i class="bx bx-trash mx-1 "></i>Delete</button>
+                                        </form>
 
 
 
-<!-- Modal Delete -->
-<div class="modal js-modal " tabindex="-1" >
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
-                <button type="button" class="btn-close js-modal-close" data-bs-dismiss="modal" aria-label="Close">
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Are you sure to delete this user?</p>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger js-modal-close-2 " >Cancel</button>
-                <button type="submit" class="btn btn-primary">Confirm</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
-<!-- Modal 1-->
-<div class="modal js-modal-confirm" id="modalToggle" aria-labelledby="modalToggleLabel" tabindex="-1" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalToggleLabel">Edit User</h5>
-                <button type="button" class="btn-close js-modal-close-1" ></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="row">
-                        <div class="col mb-3">
-                            <%
-                                List<AdminDTO> listAdmin1 = admindao.getAllAdmin();
-                                for (AdminDTO adminDTO : listAdmin1) {%>
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" value="<%= adminDTO.getUsername()%>" id="username" class="form-control" placeholder="Enter Username" readonly="">
+                                    </div>
+                                    <!--                       
+                                    -->                        
+
+                                </td>
+                            </tr>
+
                             <%}%>
-                        </div>
-                        <div class="col mb-3">
-                            <label class="form-label">Role</label>
-                            <select class="form-select " aria-label="Default select example">
-                                <option selected>Select Role</option>
-                                <option value="1">Role1</option>
-                                <option value="2">Role2</option>              
-                            </select>
-                        </div>
+
+                            </tbody>
+
+                        </table>
+
+
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" id="changepassbtn" data-bs-target="#modalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Change Password</button>
-                <button type="button" class="btn btn-danger js-modal-close-3" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
         </div>
+        <!-- / Content -->
+
+
+
+        <div class="content-backdrop fade"></div>
     </div>
-</div>
-
-<!-- Modal 2-->
-<div class="modal fade " id="modalToggle2" aria-hidden="true" aria-labelledby="modalToggleLabel2" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalToggleLabel2">Change Password</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="row">
-                        <div class="col mb-3">
-                            <label for="o-pass" class="form-label">Old Password</label>
-                            <input type="password" id="o-pass" class="form-control">
-                        </div>
-                        <div class="col mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" id="password" class="form-control" >
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">Save changes</button>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="table-responsive px-5 py-5">
-
-    <table class="table table-dark">
-        <thead>
-            <tr>
-
-                <th>Username</th>
-                <th>Password</th>
-                <th>Role</th>
-                <th>Status</th>
-
-                <th>Actions</th>
-            </tr>
-
-        </thead>
-        <tbody>
-
-            <%
-
-                List<String> listRole2 = admindao.getAllRoleName();
-                int c1 = 0;
-                List<AdminDTO> listAdmin = new ArrayList();
-                listAdmin = (List<AdminDTO>) session.getAttribute("Admin_List");
-
-                if (listAdmin.size() == 0) { %>
-        <h1 class="btn btn-danger">No results</h1> <%
-            }
-            for (AdminDTO admindto : listAdmin) {
-
-
-        %>
-
-        <tr>
-            <td><%= admindto.getUsername()%></td>
-            <td><%= admindto.getPassword()%></td>
-
-            <td>
-                <%= listRole2.get(c1++)%>
-            </td>
-         <td><%if(admindto.getStatus()==1){ %>
-             <span class="badge bg-label-success">Active</span> <%
-                   
-                }else {%>
-          <span class="badge bg-label-danger">Inactive</span> <% }%>
-         </td>
-        <td style="padding-left:0 ;">
-            <div class="d-flex"
-                 >
-                <form action="AdminController" method="post">
-                    <input type="hidden" name="action" value="showupdate">                       
-                    <input type="hidden" name="username" value="<%= admindto.getUsername()%>">
-
-                    <button class="btn btn-dark"  style="color:white" type="submit"><i class="bx bx-edit mx-1 "></i> Edit </button>
-                </form>
-                <form action="AdminController" method="post">
-                    <input type="hidden" name="action" value="showchangepass">
-                    <input type="hidden" name="username" value="<%= admindto.getUsername()%>">
-                    <button type="submit" style="color:white" class="btn "><i class="bx bx-pen mx-1 "></i>Change Password</button>
-                </form>
-                <form  action="DeleteAdController" method="post">
-                    
-                    <input type="hidden" name="puser" value="<%= admindto.getUsername()%>"> 
-                    <input type="hidden" name="status" value="<%= admindto.getStatus()%>">
-                    <button type="submit" style="color:white" class="btn js-delete"><i class="bx bx-trash mx-1 "></i>Delete</button>
-                </form>
-
-
-
-
-
-            </div>
-            <!--                       
-            -->                        
-
-        </td>
-        </tr>
-
-        <%}%>
-
-        </tbody>
-
-    </table>
-
-
-</div>
-</div>
-
-<!-- / Content -->
-
-
-
-<div class="content-backdrop fade"></div>
-</div>
-<!-- Content wrapper -->
+    <!-- Content wrapper -->
 </div>
 <!-- / Layout page -->
 </div>
@@ -378,7 +408,7 @@
 
 
 <!-- Main JS -->
-<script src="./js/main1.js"></script>
+<script src="../assets/js/main1.js"></script>
 
 
 

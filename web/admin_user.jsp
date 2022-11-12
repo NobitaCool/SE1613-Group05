@@ -69,37 +69,58 @@
         <script src="./assets/js/config.js"></script>
     </head>
 
-    <body>
+    <body style="background-color: #273A89">
         <!-- Layout wrapper -->
 
         <!-- / Menu -->
 
         <!-- Layout container -->
-
-
-        <div class="navbar-nav-right d-flex flex-row-reverse align-items-center my-4" id="navbar-collapse">
-            <nav class="navbar navbar-light">
-                <div class="container-fluid">
-                    <div style="cursor: pointer; color:white;" class="btn btn-outline-danger">
-
-                        <a href="MainController?action=Logout">Logout</a>
+        <div class="container-xxl " >
+            <div class="container-fluid nav-bar bg-white px-0 border-bottom-1">
+                <nav class="navbar navbar-expand-lg  navbar-light py-0 px-5 border-bottom d-flex justify-content-between">
+                    <div>
+                        <a class="navbar-brand d-flex align-items-center text-center">
+                            <div class="icon p-2 me-2">
+                                <img class="img-fluid"
+                                     src="./img/about_us.png"
+                                     alt="Icon" style="width: 30px; height: 30px;">
+                            </div>
+                            <h1 class="m-0 " style="color:#273A89;">E-Butler</h1>
+                        </a>
+                        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
                     </div>
 
 
 
-                    <form class="d-flex" action="SearchUserController">
+
+                    <!-- On hover dropdown button -->
+
+                    <!-- <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a> -->
+                    <div class="btn-group me-3 " ">
+
+                        <div style="cursor: pointer; " class="btn btn-secondary">
+
+                            <a style="color:white" href="MainController?action=Logout">Logout</a>
+                        </div>
+                    </div>
+                </nav>
+                 <div class="navbar-nav-right d-flex flex-row-reverse align-items-center my-4" id="navbar-collapse">
+
+
+                    </ul>
+
+                </div>
+   
+    <div class="nav mx-5">
+        <h2>User List</h2>
+
+    </div>
+<form class="d-flex mx-3" action="SearchUserController">
                         <input class="form-control me-sm-2 mx-2" type="search" placeholder="Search..." aria-label="Search" name="userS"/>
                         <button class="btn btn-outline-primary" type="submit"><i class="bx bx-search"></i></button>
                     </form>
-                </div>
-            </nav>     
-        </ul>
-    </div>
-    <nav class="nav mx-5">
-        <h2>User List</h2>
-
-    </nav>
-
     <div class="mx-5 mt-3">
         <nav aria-label="breadcrumb m-5">
             <ol class="breadcrumb breadcrumb-style">
@@ -246,9 +267,10 @@
     </div>
     <!-- Content wrapper -->
 </div>
+                 </div>
 <!-- / Layout page -->
 </div>
-
+</div>
 <!-- Overlay -->
 <div class="layout-overlay layout-menu-toggle"></div>
 </div>

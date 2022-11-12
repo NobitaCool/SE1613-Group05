@@ -31,7 +31,7 @@
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
             />
 
-        <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+        <title>Admin Dashboard</title>
 
         <meta name="description" content="" />
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -82,7 +82,35 @@
         <!-- Layout container -->
 
         <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg  navbar-light py-0 px-5 border-bottom d-flex justify-content-between" S>
+            <div>
+                <a class="navbar-brand d-flex align-items-center text-center">
+                    <div class="icon p-2 me-2">
+                        <img class="img-fluid"
+                             src="./img/about_us.png"
+                             alt="Icon" style="width: 30px; height: 30px;">
+                    </div>
+                    <h1 class="m-0 " style="color:#273A89;">E-Butler</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
 
+
+
+
+            <!-- On hover dropdown button -->
+
+            <!-- <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a> -->
+            <div class="btn-group me-3 " ">
+
+                <div style="cursor: pointer; " class="btn btn-secondary">
+
+                    <a style="color:white" href="MainController?action=Logout">Logout</a>
+                </div>
+            </div>
+        </nav>
 
 
         <!-- / Navbar -->
@@ -107,7 +135,7 @@
                     %>
 
                     <!-- Total Revenue -->
-                    <div class="col-4 mb-4">
+                    <div class="col-6 mb-4">
                         <div class="card h-100">
                             <div class="card-header d-flex align-items-center justify-content-between pb-0">
                                 <div class="card-title mb-0">
@@ -134,7 +162,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <div class="d-flex flex-column align-items-center gap-1">
+                                    <div class="d-flex flex-column align-items-center gap-1 w-100">
 
                                         <span>Total Users</span>
 
@@ -193,7 +221,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4 mb-4">
+                    <div class="col-6 mb-4">
                         <div class="card h-100">
                             <div class="card-header d-flex align-items-center justify-content-between pb-0">
                                 <div class="card-title mb-0">
@@ -219,8 +247,8 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <div class="d-flex flex-column align-items-center gap-1">
+                                <div class="d-flex justify-content-between align-items-center  mb-3">
+                                    <div class="d-flex flex-column align-items-center " style="width:100%;">
 
                                         <span>Total Users</span>
 
@@ -279,92 +307,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4 mb-4">
-                        <div class="card h-100">
-                            <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                                <div class="card-title mb-0">
-                                    <h5 class="m-0 me-2">User Statistics</h5>
-
-                                </div>
-                                <div class="dropdown">
-                                    <button
-                                        class="btn p-0"
-                                        type="button"
-                                        id="orederStatistics"
-                                        data-bs-toggle="dropdown"
-                                        aria-haspopup="true"
-                                        aria-expanded="false"
-                                        >
-                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
-                                        <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <div class="d-flex flex-column align-items-center gap-1">
-
-                                        <span>Total Users</span>
-
-                                        <h2 class="mb-2"><%=listUser.size()%></h2>
-                                        <canvas id="myChart3" style="width:100%;max-width:600px"></canvas>
-                                    </div>
-                                    <div id="orderStatisticsChart"></div>
-                                </div>
-                                <ul class="p-0 m-0">
-                                    <li class="d-flex mb-4 pb-1">
-                                        <div class="avatar flex-shrink-0 me-3">
-                                            <span class="avatar-initial rounded bg-label-primary"
-                                                  ><i class="bx bx-mobile-alt"></i
-                                                ></span>
-                                        </div>
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-0">Customer</h6>
-
-                                            </div>
-                                            <div class="user-progress">
-                                                <small  id='customerchart' class="fw-semibold"><%=listUser2.size()%></small>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1">
-                                        <div class="avatar flex-shrink-0 me-3">
-                                            <span class="avatar-initial rounded bg-label-success"><i class="bx bx-closet"></i></span>
-                                        </div>
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-0">Provider</h6>
-
-                                            </div>
-                                            <div class="user-progress">
-                                                <small id='providerchart' class="fw-semibold"><%=listUser1.size()%></small>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex mb-4 pb-1">
-                                        <div class="avatar flex-shrink-0 me-3">
-                                            <span class="avatar-initial rounded bg-label-info"><i class="bx bx-home-alt"></i></span>
-                                        </div>
-                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                            <div class="me-2">
-                                                <h6 class="mb-0">Shipper</h6>
-
-                                            </div>
-                                            <div class="user-progress">
-                                                <small id='shipperchart' class="fw-semibold"><%=listUser3.size()%></small>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <!--/ Total Revenue -->
 
                 </div>
@@ -375,7 +318,7 @@
                         <div class="card-header header-elements">
                             <div class="ps-0 ps-sm-2 d-flex flex-column mb-2 mb-sm-0">
                                 <p class="card-subtitle text-muted mb-1">Revenue</p>
-                                
+
                             </div>
                             <div class="card-action-element ms-auto py-0">
                                 <div class="dropdown">
@@ -399,11 +342,11 @@
                             <div class="w3-light-grey">
                                 <div class="w3-container w3-green w3-center" style="width:25%">25%</div>
                             </div><br>
-<label>Content1</label>
+                            <label>Content1</label>
                             <div class="w3-light-grey">
                                 <div class="w3-container w3-red w3-center" style="width:50%">50%</div>
                             </div><br>
-<label>Content1</label>
+                            <label>Content1</label>
                             <div class="w3-light-grey">
                                 <div class="w3-container w3-blue" style="width:75%">75%</div>
                             </div><br>

@@ -284,6 +284,22 @@
         <servlet-name>AdminReController</servlet-name>
         <servlet-class>com.ebutler.swp.controllers.AdminReController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleleAdminController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.DeleleAdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchAdminController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.SearchAdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchUserController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.SearchUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleleUserController</servlet-name>
+        <servlet-class>com.ebutler.swp.controllers.DeleleUserController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -567,6 +583,22 @@
     <servlet-mapping>
         <servlet-name>AdminReController</servlet-name>
         <url-pattern>/AdminReController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleleAdminController</servlet-name>
+        <url-pattern>/DeleleAdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchAdminController</servlet-name>
+        <url-pattern>/SearchAdminController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchUserController</servlet-name>
+        <url-pattern>/SearchUserController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleleUserController</servlet-name>
+        <url-pattern>/DeleleUserController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>60</session-timeout>

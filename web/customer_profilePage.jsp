@@ -1,11 +1,18 @@
 
 
+<<<<<<< Updated upstream
+=======
+<%@page import="com.ebutler.swp.dto.ReviewDTO"%>
+<%@page import="com.ebutler.swp.dto.ServiceOrderedHistoryDTO"%>
+<%@page import="com.ebutler.swp.dto.ProductOrderHistoryDTO"%>
+>>>>>>> Stashed changes
 <%@page import="com.ebutler.swp.dto.AddressDTO"%>
 <%@page import="com.ebutler.swp.dto.CityDTO"%>
 <%@page import="com.ebutler.swp.dto.ProvinceDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.ebutler.swp.dto.UserDTO"%>
 <%@page import="com.ebutler.swp.dto.CustomerDTO"%>
+<%@page import="java.text.DecimalFormat"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -350,10 +357,46 @@
                                                     <span class="txt-md bold">Quantity:  ${o.quantity}</span>
                                                 </div>
                                             </div>
+<<<<<<< Updated upstream
+=======
+                                            <div style="height: 50%; align-items: flex-end;" class="flex-between">
+                                                <span class="txt-sm bold">Quantity:  <%=product.getQuantity()%></span>
+                                                <%
+                                                    if (product.getStatus() == 3) {
+                                                %>
+                                                <button type="button" style="background-color: var(--primary-color); border-radius: 0; padding: 8px 16px;" class="btn-lg border-no txt-md review_add">
+                                                    Review
+                                                </button>
+                                                <div class="overlay fixed top left right bot review_detail__add hide">
+                                                    <div class="flex-center full-h full-w">
+                                                        <div class="relative" style="width: 50vw; height: fit-content; background-color: white;">
+                                                            <div style="width: 100%;">
+                                                                <div class="pad-2">
+                                                                    <div style="padding: 0;" class="flex-col">
+                                                                      
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%
+                                                } else if (product.getStatus() == 5) {
+                                                %>
+                                                <button type="button" style="border: 1px solid var(--primary-color); border-radius: 0; color: var(--primary-color); background-color: transparent; padding: 8px 16px;" class="btn-lg border-no txt-md" disabled>
+                                                    <i class="fa-solid fa-check"></i>
+                                                    Review
+                                                </button>
+                                                <%
+                                                    }
+                                                %>
+                                            </div>
+>>>>>>> Stashed changes
                                         </div>
                                     </div>
                                 </c:forEach>
 
+<<<<<<< Updated upstream
                                 <c:forEach items="${sessionScope.ORDERED_SERVICE_LIST_DELIVERED}" var="o">
                                     <div class="order-card m-y-12">
                                         <div class="flex">
@@ -375,6 +418,88 @@
                                                         <span>
                                                             $${o.price}
                                                         </span>
+=======
+
+            <!-- Order service start -->
+                 <div class="grid form order-service-his-form <%if (!current_form.equals(
+                        "order_service_history")) {%>hide<%}%>">
+                <div class="grid wide">
+                    <div class="flex-vertical-center m-y-32">
+                        <h1 class="txt-xl">Order Service History</h1>
+                    </div>
+
+                    <div class="row m-y-32">
+                        <%
+                            ArrayList<ServiceOrderedHistoryDTO> service_history_list = (ArrayList<ServiceOrderedHistoryDTO>) session.getAttribute("ORDERED_SERVICE_LIST_DELIVERED");
+                            service_history_list = (service_history_list == null) ? new ArrayList<ServiceOrderedHistoryDTO>() : service_history_list;
+
+//                            ArrayList<String> order_product_date = new ArrayList<>();
+                            ArrayList<Integer> serevice_order_id = new ArrayList<>();
+
+//                            for (ProductOrderHistoryDTO product : product_history_list) {
+//                                if (order_product_date.contains(product.getOrder_Date())) {
+//                                    continue;
+//                                }
+//
+//                                order_product_date.add(product.getOrder_Date());
+//                            }
+                            for (ServiceOrderedHistoryDTO service : service_history_list) {
+                                if (serevice_order_id.contains(service.getOrder_id())) {
+                                    continue;
+                                }
+
+                                serevice_order_id.add(service.getOrder_id());
+                            }
+
+                        %>
+
+                        <%                            for (int order : serevice_order_id) {
+
+                        %>
+                        <!-- Order item -->
+                        <div class="block-border flex-col grid m-y-32">
+                            <!-- Order head -->
+                            <div style="background-color: #F9FAFB;" class="flex-between pad-2">
+                                <div class="flex-col flex-horizon-center">
+                                    <span class="txt-lg bold">#<%=order%></span>
+                                    <div class="flex-center">
+                                        <%
+                                            for (ServiceOrderedHistoryDTO service : service_history_list) {
+                                                if (service.getOrder_id() == order) {
+                                        %>
+                                        <span class="txt-md"><%=service.getOrder_Date()%></span>
+                                        <span class="m-x-12">-</span>
+                                        <span class="delivered">delivered</span>
+                                        <%
+                                                    break;
+                                                }
+                                            }
+                                        %>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <%
+                                for (ServiceOrderedHistoryDTO service : service_history_list) {
+                                    if (service.getOrder_id() == order) {
+                            %>
+                            <!-- Order detail -->
+                            <div class="pad-1">
+                                <div class="order-card">
+                                    <div class="flex">
+                                        <div style="width: 6.5rem; height: 6.5rem;" class="flex-center order-img">
+                                            <img src="<%=service.getImage()%>"
+                                                 alt="">
+                                        </div>
+                                        <div style="flex: 1; margin-left: 1rem;" class="flex-col">
+                                            <div class="flex-between">
+                                                <div class="flex-col flex-horizon-center">
+                                                    <span class="txt-sm bold"><%=service.getStaff_name()%></span>
+                                                    <div class="flex-horizon-center flex-center">
+                                                        <span class="txt-xs"><%=service.getService_name()%></span>
+                                                        <span class="m-x-12">|</span>
+                                                        <span class="txt-xs">Provider: <%=service.getProvider_name()%></span>
+>>>>>>> Stashed changes
                                                     </div>
                                                 </div>
                                                 <div style="height: 50%;" class="flex-end flex-col">
@@ -387,6 +512,27 @@
 
                             </div>
                         </div>
+<<<<<<< Updated upstream
+=======
+                        <%
+                            }
+                        %>
+                    </div>
+                </div>
+            </div>
+            <!-- Order service end -->
+
+            <!-- Order pending start -->
+                 <div class="grid form order-pending-form <%if (!current_form.equals(
+                        "order_pending")) {%>hide<%}%>">
+                <div class="grid wide">
+                    <div class="flex-vertical-center m-y-32">
+                        <h1 class="txt-xl">Order Pending</h1>
+                    </div>
+
+                    <div class="row m-y-32">
+                        <!-- Order item -->
+>>>>>>> Stashed changes
                         <div class="block-border flex-col grid m-y-32">
                             <!-- Order head -->
                             <div style="background-color: #F9FAFB;" class="flex-between pad-2">
@@ -462,6 +608,7 @@
                                             </div>
                                         </div>
                                     </div>
+<<<<<<< Updated upstream
                                 </c:forEach>
                                 <!-- Service end -->
 
@@ -549,6 +696,75 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>-->
+=======
+                                </div>
+                            </c:forEach>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Order pending end -->
+
+            <!-- Order cancel start -->
+                 <div class="grid form order-canceled-form <%if (!current_form.equals(
+                        "order-canceled-form")) {%>hide<%}%>">
+                <div class="grid wide">
+                    <div class="flex-vertical-center m-y-32">
+                        <h1 class="txt-xl">Order Canceled</h1>
+                    </div>
+
+                    <div class="row m-y-32">
+                        <%
+                            ArrayList<ProductOrderHistoryDTO> product_cancel_list = (ArrayList<ProductOrderHistoryDTO>) session.getAttribute("ORDERED_PRODUCT_LIST_CANCELED");
+                            product_cancel_list = (product_cancel_list == null) ? new ArrayList<ProductOrderHistoryDTO>() : product_cancel_list;
+
+//                            ArrayList<String> order_product_date = new ArrayList<>();
+                            ArrayList<Integer> product_order_canceled_id = new ArrayList<>();
+
+//                            for (ProductOrderHistoryDTO product : product_history_list) {
+//                                if (order_product_date.contains(product.getOrder_Date())) {
+//                                    continue;
+//                                }
+//
+//                                order_product_date.add(product.getOrder_Date());
+//                            }
+                            for (ProductOrderHistoryDTO product : product_cancel_list) {
+                                if (product_order_canceled_id.contains(product.getOrder_id())) {
+                                    continue;
+                                }
+
+                                product_order_canceled_id.add(product.getOrder_id());
+                            }
+
+                        %>
+
+                        <%                            for (int order : product_order_canceled_id) {
+
+                        %>
+                        <!-- Order item -->
+                        <div class="block-border flex-col grid m-y-32">
+                            <!-- Order head -->
+                            <div style="background-color: #F9FAFB;" class="flex-between pad-2">
+                                <div class="flex-col flex-horizon-center">
+                                    <span class="txt-lg bold">#<%=order%></span>
+                                    <div class="flex-center">
+                                        <%
+                                            for (ProductOrderHistoryDTO product : product_cancel_list) {
+                                                if (product.getOrder_id() == order) {
+                                        %>
+                                        <span class="txt-md"><%=product.getOrder_Date()%></span>
+                                        <span class="m-x-12">-</span>
+                                        <span style="color: rgb( 219, 219, 219)" class="delivered">Canceled</span>
+                                        <%
+                                                    break;
+                                                }
+                                            }
+                                        %>
+                                    </div>
+                                </div>
+                            </div>
+>>>>>>> Stashed changes
 
                             </div>
                         </div>
@@ -558,7 +774,8 @@
             <!-- Order history end -->
 
             <!-- Change password start -->
-            <div class="grid wide form password-form <%if (!current_form.equals("change_password")) {%>hide<%}%>">
+                 <div class="grid wide form password-form <%if (!current_form.equals(
+                        "change_password")) {%>hide<%}%>">
                 <div class="flex-vertical-center m-y-32">
                     <h1 class="txt-xl">Update Your Password</h1>
                 </div>
@@ -566,13 +783,16 @@
                     String duplicatePassword = (String) request.getAttribute("DUPLICATE_NEW_PASSWORD");
                     String confirmPasswordError = (String) request.getAttribute("CONFIRM_PASSWORD_WRONG");
                     String emptyField = (String) request.getAttribute("EMPTY");
-                    if (duplicatePassword == null) {
+                    if (duplicatePassword
+                            == null) {
                         duplicatePassword = "";
                     }
-                    if (confirmPasswordError == null) {
+                    if (confirmPasswordError
+                            == null) {
                         confirmPasswordError = "";
                     }
-                    if (emptyField == null) {
+                    if (emptyField
+                            == null) {
                         emptyField = "";
                     }
                 %>
@@ -609,7 +829,8 @@
             <!-- Change password end -->
 
             <!-- Update address start -->
-            <div class="grid form address-form <%if (!current_form.equals("address")) {%>hide<%}%>">
+                 <div class="grid form address-form <%if (!current_form.equals(
+                        "address")) {%>hide<%}%>">
                 <div class="grid wide">
                     <div class="flex-vertical-center m-y-32">
                         <h1 class="txt-xl">Update Your Address</h1>
@@ -629,7 +850,8 @@
                         </div>
                     </div>
 
-                    <div class="overlay fixed top left right bot address_detail__add <%if (!action_type.equals("add_address")) {%>hide<%}%>">
+                    <div class="overlay fixed top left right bot address_detail__add <%if (!action_type.equals(
+                                     "add_address")) {%>hide<%}%>">
                         <div class="flex-center full-h full-w">
                             <div class="relative" style="width: 50vw; height: fit-content; background-color: white;">
                                 <div style="width: 100%;">
@@ -934,7 +1156,7 @@
 <script src="js/main.js"></script>
 
 <!-- javascript -->
-<script src="js/customer_profilePage.js"></script>
+<script src="./js/customer_profilePage.js"></script>
 <script
     src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -971,6 +1193,75 @@
                                                                             });
                                                                         }
 </script>
+<<<<<<< Updated upstream
+=======
+<script language="javascript">
+    const main = document.getElementById("toast");
+    if (main) {
+        const duration = 2000;
+        const toast = document.createElement("div");
+        // Auto remove toast
+        const autoRemoveId = setTimeout(function () {
+            main.removeChild(toast);
+        }, duration + 1000);
+        // Remove toast when clicked
+        toast.onclick = function (e) {
+            if (e.target.closest(".toast__close")) {
+                main.removeChild(toast);
+                clearTimeout(autoRemoveId);
+            }
+        };
+
+    <%
+        if (messageError.isEmpty()
+                && !messageSuccess.isEmpty()) {
+    %>
+        toast.classList.add("toast", `toast--success`, "showing");
+
+        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+
+        toast.innerHTML =
+                `<div class="toast__icon">
+            <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast__body">
+            <h3 class="toast__title">SUCCESS</h3>
+                <p class="toast__msg"><%=messageSuccess%></p>
+                </div>
+            <div class="toast__close">
+            <i class="fas fa-times"></i>
+            </div>
+                    `;
+
+    <%
+        }
+    %>
+
+    <%
+        if (!messageError.isEmpty()
+                && messageSuccess.isEmpty()) {
+    %>
+        toast.classList.add("toast", `toast--error`);
+        toast.style.animation = `slideInLeft ease .3s, fadeOut linear 1s 1.5s forwards`;
+        toast.innerHTML =
+                `<div class="toast__icon">
+            <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast__body">
+            <h3 class="toast__title">ERROR</h3>
+                <p class="toast__msg"><%=messageError%></p>
+                </div>
+            <div class="toast__close">
+            <i class="fas fa-times"></i>
+            </div>
+            `;
+    <%
+        }
+    %>
+        main.appendChild(toast);
+    }
+</script>
+>>>>>>> Stashed changes
 </body>
 
 </html>

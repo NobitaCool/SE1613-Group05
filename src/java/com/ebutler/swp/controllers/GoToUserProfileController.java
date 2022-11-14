@@ -47,7 +47,11 @@ public class GoToUserProfileController extends HttpServlet {
             List<ProductOrderHistoryDTO> orderedProductListPending = historyDAO.getListProductOrderHistory(currentUser.getUsername(), 0);
             List<ServiceOrderedHistoryDTO> orderedServiceListPending = historyDAO.getListServideOrderHistory(currentUser.getUsername(), 0);
             
+<<<<<<< Updated upstream
             List<ProductOrderHistoryDTO> orderedProductListDelivered = historyDAO.getListProductOrderHistory(currentUser.getUsername(), 2);
+=======
+            List<ProductOrderHistoryDTO> orderedProductListDelivered = historyDAO.getListProductOrderHistoryDelivered(currentUser.getUsername(), 3);
+>>>>>>> Stashed changes
             List<ServiceOrderedHistoryDTO> orderedServiceListDelivered = historyDAO.getListServideOrderHistory(currentUser.getUsername(), 2);
             
             AddressDAO addressDAO = new AddressDAO();

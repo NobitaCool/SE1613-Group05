@@ -30,6 +30,12 @@ public class OrderHistoryDAO {
 "JOIN tblService service ON service.service_ID = orderDetail.id \n" +
 "JOIN tblProvider provider ON staff.provider_ID = provider.username\n" +
 "where customer.username=? and orderDetail.status = ?";
+    
+    private static final String GET_LIST_PRODUCT_ORDER_DELIVERED = "select detail.product_detail_ID, order1.order_ID, customer.username, order1.order_Date, order1.payment, prodDetail.name,prodDetail.price,  detail.quantity , prodDetail.image, [provider].name AS [provider_name], product.name AS [product_category], detail.status \n" +
+    "from tblCustomer customer JOIN tblOrder order1 ON customer.username = order1.customer_ID JOIN tblOrder_Product_Detail detail ON detail.order_ID = order1.order_ID JOIN tblProductDetail prodDetail ON prodDetail.id = detail.product_detail_ID\n" +
+    "JOIN tblProvider [provider] ON [provider].username =  prodDetail.provider_ID\n" +
+    "JOIN tblProduct product ON product.product_ID = prodDetail.product_ID\n" +
+    "where customer.username = ? AND detail.status = ? or detail.status = 5 order by order1.order_ID DESC";
        
 
     public static List<ProductOrderHistoryDTO> getListProductOrderHistory(String username, int status) throws SQLException {
@@ -62,6 +68,7 @@ public class OrderHistoryDAO {
 
         return list;
     }
+    
     public static List<ServiceOrderedHistoryDTO> getListServideOrderHistory(String username, int status) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -92,6 +99,7 @@ public class OrderHistoryDAO {
 
         return list;
     }
+    
     public static List<ProductOrderHistoryDTO> getListProductOrderHistoryDelivered(String username, int status) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -99,12 +107,18 @@ public class OrderHistoryDAO {
         List<ProductOrderHistoryDTO> list = new ArrayList();
         try {
             conn = DBUtils.getConnection();
-            ptm = conn.prepareStatement(GET_LIST_PRODUCT_ORDER_HISTORY);
+            ptm = conn.prepareStatement(GET_LIST_PRODUCT_ORDER_DELIVERED);
             ptm.setString(1, username);
             ptm.setInt(2, status);
             rs = ptm.executeQuery();
             while (rs.next()) {
+<<<<<<< Updated upstream
                 list.add(new ProductOrderHistoryDTO(rs.getString("username"), rs.getString("order_Date"),rs.getString("payment"), rs.getString("name"), rs.getDouble("price") , rs.getInt("quantity"),rs.getString("image"), rs.getString("provider_name"), rs.getString("product_category") , rs.getInt("status")));
+=======
+                ProductOrderHistoryDTO product = new ProductOrderHistoryDTO( rs.getInt("order_ID"),rs.getString("username"), rs.getString("order_Date"),rs.getString("payment"), rs.getString("name"), rs.getDouble("price") , rs.getInt("quantity"),rs.getString("image"), rs.getString("provider_name"), rs.getString("product_category") , rs.getInt("status"));
+                product.setId(rs.getInt("product_detail_ID"));
+                list.add(product);
+>>>>>>> Stashed changes
             }
         } catch (Exception e) {
             e.printStackTrace();

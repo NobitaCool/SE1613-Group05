@@ -3361,9 +3361,17 @@ INSERT INTO tblShipper
 VALUES
 	('shoppe5', '1', 'Le Ba Hau', 1, 0)
 	
+<<<<<<< Updated upstream
 ------------- bảng admin --------------------
 insert into tblAdminRole(role_ID, role_Name) values ('MA', 'Admin Master')
 insert into tblAdminRole(role_ID, role_Name) values ('US', 'Admin User')
 insert into tblAdminRole(role_ID, role_Name) values ('RE', 'Admin Revenue')
 
 insert into tblAdmin(user_Name, password, role_ID) values('bao', '1', 'MA', 1)
+=======
+	select * from tblOrder_Product_Detail
+
+update tblOrder_Product_Detail set status = 3 where product_detail_ID = 140
+
+select * from tblOrder_Product_Detail
+>>>>>>> Stashed changes
